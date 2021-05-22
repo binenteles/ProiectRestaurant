@@ -1,6 +1,7 @@
 package com.sda.alexjelescu.hibernate.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -15,6 +16,13 @@ public class Products {
     private Integer quantity;
     @Column(name = "price")
     private Integer price;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_categories_id")
+    private Categories categories;
+
+    @OneToMany(mappedBy = "products")
+    private List<DailyOffers> dailyOffers;
 
     public Products() {
     }

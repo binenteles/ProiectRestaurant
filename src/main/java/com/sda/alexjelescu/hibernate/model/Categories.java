@@ -1,6 +1,7 @@
 package com.sda.alexjelescu.hibernate.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -17,6 +18,9 @@ public class Categories {
     private String desert;
     @Column(name = "drinks")
     private String drinks;
+
+    @OneToMany(mappedBy = "categories")
+    private List<Products> products;
 
     public Categories() {
     }

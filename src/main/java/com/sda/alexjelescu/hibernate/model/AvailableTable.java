@@ -2,6 +2,7 @@ package com.sda.alexjelescu.hibernate.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "available_table")
@@ -18,6 +19,9 @@ public class AvailableTable {
     private Date endDate;
     @Column(name = "table_info")
     private String tableInfo;
+
+    @OneToMany(mappedBy = "availableTable")
+    private List<BookTable> bookTables;
 
     public AvailableTable() {
     }

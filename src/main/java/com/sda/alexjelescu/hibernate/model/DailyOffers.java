@@ -15,6 +15,10 @@ public class DailyOffers {
     @Column(name = "discount")
     private Integer discount;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_product_id")
+    private Products products;
+
     public DailyOffers() {
     }
 

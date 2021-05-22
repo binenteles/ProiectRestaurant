@@ -1,6 +1,7 @@
 package com.sda.alexjelescu.hibernate.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -17,6 +18,10 @@ public class User {
     private String phoneNumber;
     @Column(name = "name")
     private String email;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookTable> bookTables;
+
 
     public User() {
     }

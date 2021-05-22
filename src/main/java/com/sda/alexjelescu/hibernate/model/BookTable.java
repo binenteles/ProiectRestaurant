@@ -19,6 +19,14 @@ public class BookTable {
     @Column(name = "table_info")
     private String tableInfo;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_available_table_id")
+    private AvailableTable availableTable;
+
     public BookTable() {
     }
 
