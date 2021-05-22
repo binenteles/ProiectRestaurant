@@ -1,7 +1,9 @@
 package com.sda.alexjelescu.hibernate.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -22,6 +24,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<BookTable> bookTables;
 
+    @ManyToMany
+    @JoinTable(name = "users_products",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns ={@JoinColumn(name = "menu_id")})
+    private Set<Products> products = new HashSet<>();
 
     public User() {
     }

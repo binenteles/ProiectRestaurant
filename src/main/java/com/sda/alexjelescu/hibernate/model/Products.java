@@ -1,7 +1,9 @@
 package com.sda.alexjelescu.hibernate.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -23,6 +25,9 @@ public class Products {
 
     @OneToMany(mappedBy = "products")
     private List<DailyOffers> dailyOffers;
+
+    @ManyToMany(mappedBy = "products")
+    private Set<User> users = new HashSet<>();
 
     public Products() {
     }
