@@ -30,6 +30,8 @@ public class User {
             inverseJoinColumns ={@JoinColumn(name = "menu_id")})
     private Set<Products> products = new HashSet<>();
 
+    //Test
+
     public User() {
     }
 
