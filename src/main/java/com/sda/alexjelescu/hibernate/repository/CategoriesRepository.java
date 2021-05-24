@@ -36,4 +36,5 @@ public class CategoriesRepository {
         transaction.commit();
         session.close();
     }
+
 }

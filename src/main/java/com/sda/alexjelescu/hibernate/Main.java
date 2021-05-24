@@ -10,7 +10,6 @@ import com.sda.alexjelescu.hibernate.utils.SessionManager;
 
 import java.sql.Date;
 
-
 public class Main {
     public static void main(String[] args) {
         AvailableTableRepository availableTableRepository = new AvailableTableRepository();
@@ -26,6 +25,8 @@ public class Main {
         userRepository.save(user1);
 
         //SessionManager.shutDown();
-
     }
+
+    //DREAM TEAM!
+
 }
