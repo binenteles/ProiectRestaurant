@@ -1,0 +1,170 @@
+From 0c5b4e81549481909ad97d2012a823b1eb504e27 Mon Sep 17 00:00:00 2001
+From: alex <alexjelescu@gmail.com>
+Date: Sun, 23 May 2021 01:03:05 +0300
+Subject: [PATCH] many to many link created
+
+---
+ .../alexjelescu/hibernate/model/Products.java |   5 +++++
+ .../sda/alexjelescu/hibernate/model/User.java |   7 +++++++
+ .../hibernate/model/Products.class            | Bin 2500 -> 2722 bytes
+ .../alexjelescu/hibernate/model/User.class    | Bin 2598 -> 2988 bytes
+ 4 files changed, 12 insertions(+)
+
+diff --git a/src/main/java/com/sda/alexjelescu/hibernate/model/Products.java b/src/main/java/com/sda/alexjelescu/hibernate/model/Products.java
+index ee896f0..f752514 100644
+--- a/src/main/java/com/sda/alexjelescu/hibernate/model/Products.java
++++ b/src/main/java/com/sda/alexjelescu/hibernate/model/Products.java
+@@ -1,7 +1,9 @@
+ package com.sda.alexjelescu.hibernate.model;
+ 
+ import javax.persistence.*;
++import java.util.HashSet;
+ import java.util.List;
++import java.util.Set;
+ 
+ @Entity
+ @Table(name = "products")
+@@ -24,6 +26,9 @@ public class Products {
+     @OneToMany(mappedBy = "products")
+     private List<DailyOffers> dailyOffers;
+ 
++    @ManyToMany(mappedBy = "products")
++    private Set<User> users = new HashSet<>();
++
+     public Products() {
+     }
+ 
+diff --git a/src/main/java/com/sda/alexjelescu/hibernate/model/User.java b/src/main/java/com/sda/alexjelescu/hibernate/model/User.java
+index fca6c89..96596e1 100644
+--- a/src/main/java/com/sda/alexjelescu/hibernate/model/User.java
++++ b/src/main/java/com/sda/alexjelescu/hibernate/model/User.java
+@@ -1,7 +1,9 @@
+ package com.sda.alexjelescu.hibernate.model;
+ 
+ import javax.persistence.*;
++import java.util.HashSet;
+ import java.util.List;
++import java.util.Set;
+ 
+ @Entity
+ @Table(name = "user")
+@@ -22,6 +24,11 @@ public class User {
+     @OneToMany(mappedBy = "user")
+     private List<BookTable> bookTables;
+ 
++    @ManyToMany
++    @JoinTable(name = "users_products",
++            joinColumns = {@JoinColumn(name = "user_id")},
++            inverseJoinColumns ={@JoinColumn(name = "menu_id")})
++    private Set<Products> products = new HashSet<>();
+ 
+     public User() {
+     }
+diff --git a/target/classes/com/sda/alexjelescu/hibernate/model/Products.class b/target/classes/com/sda/alexjelescu/hibernate/model/Products.class
+index 53d986e953828e9e8359ffbd0ce78e8bad8e0f01..d498354e8ad32806514fc519e5e62d4da7ce74ac 100644
+GIT binary patch
+literal 2722
+zcma)8`%@EF6h0fsW(kqR2((Z|6cmWS(rRsM0F{6k8$cz}(idHlOSp8io9?3{<Me-O
+zX9~{Lnf?L&qdNWW-pzx!IQ)?NI<N0L_nf==_rJgYA)<R!Nzx!~Bxo~9G1};(E3_qs
+z=VEvvhL>X4PEa{XeYBy`D>3hg;Tw&<74xn}-)Z!{SpJZp9~1PGLTa5^ezB_1mC}*%
+zo1vSARnv=>$7;;UD>U-bw>(~FJKW{_CVOmIwr6<Uwp@jV1B=&sgE=mDJ!VyyUaZ3C
+zW`tm!S<Ep!R^2g7pFv4;J+ZGHe^4Kh%EygBzqq=#SuU1$6&j83U$9NTZozM_Wz?BM
+z3BhZRgIIsVv8#T?+YHXL9W=K+hg&t+q(YTFX{-I}8({4LTD;-#3fv_t0;}zC2I32)
+zie1;;s-YVudws-A=2m?Dknc0cf|_2ptIX63Eek}r76Ey~u#U_2mL=GYMaZAo+-lLv
+z9Q?A^#vqAR4Q?K99ULJ43S}fQ-{YoU!gauD-!`uSkney%p-a4YAr7nU2>Io6Xn;W3
+z7F;0L>PDl%sw>Ex7UmSt;=UU|Om|?|W&&aU?8(JIy@Iy@O;plkQbRcEBDc7=tWeMN
+z%nnMUfQwNmUE&to^y|2;vVo#jC|j~ChPh)nT<pWcUhj|t{QQLy^<37ND>zL{Qb8w$
+zCDw7$?5&6+fw8Z~yp6CWho)yDv=kbEP8d)Y_23!BR#^|YU3x<i&_vLFIDFBn`F@zS
+zcf*}FP4L1<3s3~zp#_2D(z9iJ^vt&HI~DeXixgjKW@uhKGtoV~7Bn4FI1<o4`?3VL
+zl26g+bYG#%!CMv7`cuO_L@}l4Q~E4L<8&iM6EvKnNihu3utFcTA2tbX#ph;~Ip~=t
+zs5kNzTuRX%{VWC`OwW!t+Aqh_lsMi;u4c!Z&%+XuAe2BHmQU%CLbDfn8JbZ6pbc$n
+z|A<vQJjkMhEWBHDorw?cw6h-0a6!_}=u2<;59wc>E}So>8~B(E;=_}`*9KW6q!GJO
+z>Y<M@k6=H_=o7k1*RULO={od~{7|nSb11k80WRcy!2|@jr1u4r5Zt2Mp&*Uj6hcm8
+zk2o{f=I9Q_Sscb_F2E(?&Eu!Lw17jDLQCOpOW|HqA&CXb2;&#<u>wvC=1lG_DY<tP
+z+kHztC)E3A;QvdE1JEF_>jkGYIDUm)O4`r^%3~+|En*b@-axw-^Yt!&xjQEm&&{5Y
+znwvYJMBDu+sZgH?-A^Lzw~*l5GzQ)xR8G1JL&0&FXt5HRjfr4EDg}`xS`LBem<6$T
+z?l02*z#>M1jT#*0I#|S8EFRLM2;+FS@qDE5W2921U>TtVDmCETW-9)=5bh>UcLNU+
+zyV_!=hRpD}ie#a71GygwWR=#UfT-O-9so%G93Zk}6?zg0B+(6IITFZvG?0$Fml;_B
+zkit1YWQ!=`c?n6`$fCH{wRhBqT1{sAPbnqt_>?YX2jn`ADKm9S>1;+Gs6u#It`k^i
+leuwasvfV`1JBX}>7Zal*!o}!W&`P2qzs9}<5NODS{{f1gS4aQ=
+
+literal 2500
+zcma)6Yf~Fl7=AYi$>vgs0aEFOQrZfn3EOI0#Xz(KsHp+k64CmFS&~C~aI+it;*@dx
+zPdX!XMrZs1{wT-i?AcsMmkuBH+}_*syqEp=zrX$=qDS;&iaw&PBxUKDSiTWUO)Sq7
+z^lggbw53vA?Av15QE6A~FI0M|(kpS?OHd<0-zgODFw?8G6q>9b>%Zulp_^^3X1c7+
+z?6N{LuRPP`9k$OMerT|#rfIpl%PrGUDDPXm)w;}fxZ^Uj$+TJvM)M(pXUt@_?y}at
+zZg>nzs^f}#`{aZAh}1ag`ueqv&7DTA@mis4A^xkD;dM;-jhT9fDU=Yr4mgOVySCNx
+zn(mJOo*SaM=i1zC!zL4`97tRBXHN%f7tqGKHgCdRswuEqHfJFIpx(4Pn$yxX-C%Ez
+znZcZ<r@i5a%r>E>b*vUMv})f15pIS+-qy{NhP7)7cC#V!=N32nw6aG(9Skr?VlAB;
+zC%Z>S$iG5aNz8M(q190iI8E;HHUN1x2vkSJtC!-iF^EvETtEW^8kXP!x!TdYUDjGh
+z=F}jkfEHinCU+|eMHiR$QK2gGqtHa1n{3DHAZraBy`@mDZZ&mdU$?oq2ahrL4Tq2A
+zOW}PXOYHzkc~LU<8#<`;&`YnyL!Jc2WShC$!DLJ?E`?|*G!C60pzN)wbBg`$8h1wY
+zrbD2KplLXK*>Alx%m%mouuTuVFj9RKev_(xAbE5x86T~?XL)v$ZE=y}E4>UYi)jxZ
+zrA@#0k-{0D_W1$#t5VL;GHDsQNwXQ6qsa{27E6vM6}me3jYtIR9yeOdMu+xd|0@4E
+zYZ=<7@5S;1x}iAN9n9(4f_TQLr;BsFVO#@Op#*-gd`c?{6)!V~y{G^%fVO*h%$hD*
+zQ}nBezeH&`zd`AS%YKdva&t~!dMkfO|HfkVVlmQ}#SfkEV~&U{l0s9sU85*XW6$G$
+zmC?sEgC~WqJ9GnjNPeJ~#vTZ6L4bn1FPMV>MS5Rw8-jVd69^`7yNi(ba7Ua^a9yB9
+ztV?)|P{GF~;@!trbf`or9MB9{A3)_Z><ad=!aGv_@NFJqO~IDvI>mteQ=BqV3F?n<
+z6Am6@6%Gt&#;{Kb2Zj5m6e$!>DOxC<Qf%NaPh-%Th2||vg7CP{ZQl1?koJLZcnUHl
+zP9ik|$&{}jMa(Dkc@SApkkJ36vEQK-Apt$^Ki&(4{RORr7)M5pmqLxdq;g<fK`4PL
+z?(-e6lvyi*>$2}5FSYv2;sG;-Rzq1tM}a&H1+qq!Fd)%UAddm$$pt`U&nfg(D3I7F
+zkd;s%Uxx!3s=Lg{8h}(T03v%_5&wsPl!dH`x^DhW@z?JtkyFnoSwM}?D3wdga|By<
+x;fyl5EAk;KgyZrY!#VpKgl9A{N@RVA$YxNO2(A0wQ}u^MOw@)54-lBB(*LR280-K5
+
+diff --git a/target/classes/com/sda/alexjelescu/hibernate/model/User.class b/target/classes/com/sda/alexjelescu/hibernate/model/User.class
+index c6d7f85c89908aa6ee6f69429f23a33a07952c86..3228dc9ccefd7a6e25dcaaee3cca9308eb286013 100644
+GIT binary patch
+literal 2988
+zcmbVOc~cu@7=Je8*c=6#0+re#)>1+mnpW|s94%02Q^O%iQLG9}@-{5p>}ImNoidJJ
+zz<>NIIwN$(&iDcRP>#Rn-OWK*9L7KL9?$uEu6OhIKY#v3L^EV0XoSi!dY+&VmE$x_
+z+q`_k%eTDj@bVomFJkn4f)Z3#=?C6_<YiZ-J>E5y_EoB=ROOq9(aRXs6pFgGXcnpp
+zT`3-FueH3PnYDbubVN-wXB8UVa!p6Ci*4Q3_YJXVnwFzEx@Fo5jYy3*`G#oPy6p(F
+zBJzbQlx_wvo(NMkHAhspHNzDUQf-ItwWI%(ho|yUL&_H(udJ5~<sF5t1=wG<47YB=
+zZrIf7LZKMPwW}kr_)EQMJL{5~?h3NxG<CBEjf51~_4HIjYYE5s=#!I;1IrZaZhc=g
+z6-vq5uIXPRqOR!%4DDOitFneXAv=SfE7#GDd=cq^qj*WLnVRD^fp4*gJy)z)^}Jox
+z@|q#u917T|xcLJe{-7fAb*n0j{8G!o>;mlF2*|^RDazKGW*&jB*0n}MRF{zAFsB2Q
+zM$@Xg6$khRx&V{}!+Us|axp}kzCj6SEC3K=X(I|k{LIo#nKVG?XPEYG2W9dQT(7pk
+z9Aux>+r>}o=4%)b9U`=1bz!=)6{2&xsXGe_^<}2Ek(6a5l{2BYN-J?FlrCBo&DhqO
+zIv3L?hMfZ)*0L8W)N{mvc)rSbIh9l8H{AcDFy44gIBb~5bvQHCWvDZ-DafpL8h+@M
+zSi9v@_9?010GRAB31h|fJS3six%Gp$**z5fV4otWkXZ31Lj|vObSw`B=A~r0&5Bsn
+z4OAh{k=^AtD0skE@D4fL)uRDT=JijCW@%2L%km+UgZEUk4@$yG(S7<jMK|fA6ix6l
+z$;%WkSLr>4u6CY258INf8&x^!jOr&>CVf6d2c+|IsL-X{c>7(MpJd`IybHPU*7Gqx
+ziN?x}cRd?SiRZ@UTfrI|w5m|%B2&*8@St=+ZtNe5ii5|S=i5X#Oa~RPt3OUfg&dxe
+z_pHr!_fxO@_0015Z2A!2o)LVkV)#NKpM)CWc8&V*BYGeA>w<337=3`_xDELb*TR=e
+zV)q%hz(9S@GH!!`nw@22z(5_(GRDEk(jBZhU<lE)#KgYt;+MDS9*F3Qw!kM+U>f%s
+zD0~X=K>8Vd{(_W8^aXSz@CV)3FDV5&dJgM6l$M~RU?0rBB_;cgLOXA%@0h~BO9Ts8
+z`yoMyKa8vlAO{a|V;j(+N3@8Y?JfECeuZ=dw22;j**nJ+$>xqJnw>tTSavjgOlrr;
+z7z#mj%XczCLv$OlO(OppP^YBR8PBlq6fXRN@QEuBVz)Bo40uB3I1E_J^w<ZN$Iieb
+z**_@$8xA4j2&0mi>xwMWj%<Zi1C%4Z%J&16pU_iZc>%5%UsUFy6F2`s;>tx(Hcsq_
+zC*`|mXkODPR0sqT?FI565XiG&AkkhR^8m7N4iK-&@qGvc66*!B7zm^o3?$YIWCcK0
+z&jI2Ml|pNQK-69!g+L(d!9coN(ksmxfUKVb#2aFTUq!#nzo2~FV0-T<fk8^9QzvwZ
+zo9%@9(*xc)f^Bf}ga*@>JwmiiNPC1>n{dS=s4c?a&(J%eq23s`x?<e(n<qq@KoX*_
+R<s&hG(-!U};KQqM?_b6^c>e$Z
+
+literal 2598
+zcmbVMYf~F#6h52lCZvF&v<6E}tCf%jRx7r)fmA{PBPrC9M)5LqNnXR^W|ztCI%OPZ
+z{OqsM8KE;e(;v_u<@lW4&6UOJ_+iiczUTU!+rIwiuUAC0MBgWAiZ&CJrq7vFn0&!x
+zi%B(3kCPOqO_{d&++p%WrZ4$?D$}k^HJP6As~)GX;`FsdF~<^}N>ie#>XG`Bs_3fG
+zQYwZmTB1{wDD%`YY^^Qonx!4+V%0EATeUUQuq3+TTD(w>MaR-CTNn+YRGKil86emc
+zhUloaXx3HT5m1sXo8PUI|I|mM+R3r2UwO2?U8~ggB$^5Ezh>%A+koGQp|*uYan5UB
+zLt=>^w2ozOyWI3ZlDl?CGg`1nx(fTAovf=}<pf`S_So^EX^3s7eIPm#rQFxP;Xk9I
+zt!g?P9hl~iH5GM2btb(~j;-lR73D#o#IDvdRNLtQ-|C2Xx!N$>iq%vVRTnRg1bj3c
+z<xoRBm<Xk9HifQ~y8((N_?r!=!;T?p=3~`3fn08@$H$^sMu{U_4s?52Gc>y-Q8+hW
+z2X_r#C7P&e-P~OC5~ZtVL)GhQN8@aKX2d?!kXZhWkUm2^K-kKiulWDtFy2H<*zB0+
+zbvidc;HW>bDd=qUJAQdct=IFEHKa8i0Fwib!CAF85Mwavzs4bZGB_3E5DzhAXsmmq
+zAw$-^+NK8s1G8&7orc)ZbaWxXnJw}X22c1p7SZOmW&+yowy2n*MN(4qE@e}6lgax`
+zK45a0rX{-CUvUpY+0pc-JJB5cXUDDWN{aUA8z$dMbg7W-?a#^_GryB4RmgVNWMvNX
+zQ^*di2XhjIth*CzQKtJ6<=$kv83Pul4|3<=NHlDWEzhxmrY{8bX<!V7vO=kb^gVCI
+z!Lb?Dzm{9OSWGwYkDbDQI7T6^C*c=}*9?W}D$cj@&Iml;p=-F#T67(H=!LI0hSL|^
+zfB^kDFL)0E^z6Lg76j<ydBH3MbCd&}2Zj*kT}&M7Hok&I3zWhIa{>AxR6fQj;f&^A
+zlJtjb^ATtgwwy}@@bBQpMo@zK5>9sT2`D@G6`E0;GwdLL`;<cY!YPIG3#SyxXCkK*
+z?R%X;t%zpf^*SX`i*ckdg*s-CK1W&dJo!;LzE>~4ae+KcT#+zGbW0Ecj=OZvN5g5k
+zNb`SE>~|=Ih|`I=%v*t}d`kBNj6<Ww`9R|bRP>EY2*vnfZVmc5dzD;7W{T_Kil^1f
+zG3Mte(Q+V=@F<Wwfk0M*frLka+y#((7Xa~QP@+;GkjN;I2Z2By1_OzV0x1E=!wZ0T
+zGcVC+fk2|8K+1tYR)c{IjHB0@4FK7^0Eo9^692UPHvfk9@qj)5o8o&fNlquuD9OWi
+zMq}xecMsv1oI9gS>2Z${?lC4jMx@7>^cc}DWAYc+ozYvPIc^Q)_}m|!5Usfr{>WYO
+P2_Rd?djt6Jw^{fX@@oUp
+
+-- 
+2.30.0.windows.2
+
