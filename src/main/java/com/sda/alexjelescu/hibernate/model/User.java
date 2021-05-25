@@ -30,7 +30,6 @@ public class User {
             inverseJoinColumns ={@JoinColumn(name = "menu_id")})
     private Set<Products> products = new HashSet<>();
 
-    //Test
 
     public User() {
     }
@@ -40,6 +39,16 @@ public class User {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public User(Integer userId, String firstName, String lastName, String phoneNumber, String email, List<BookTable> bookTables, Set<Products> products) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.bookTables = bookTables;
+        this.products = products;
     }
 
     public Integer getUserId() {

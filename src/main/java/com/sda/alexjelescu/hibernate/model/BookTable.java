@@ -37,6 +37,16 @@ public class BookTable {
         this.tableInfo = tableInfo;
     }
 
+    public BookTable(Integer bookTableId, Integer seats, Date startBook, Date endBook, String tableInfo, User user, AvailableTable availableTable) {
+        this.bookTableId = bookTableId;
+        this.seats = seats;
+        this.startBook = startBook;
+        this.endBook = endBook;
+        this.tableInfo = tableInfo;
+        this.user = user;
+        this.availableTable = availableTable;
+    }
+
     public Integer getBookTableId() {
         return bookTableId;
     }

@@ -33,6 +33,15 @@ public class AvailableTable {
         this.tableInfo = tableInfo;
     }
 
+    public AvailableTable(Integer availableTableId, Integer seats, Date startDate, Date endDate, String tableInfo, List<BookTable> bookTables) {
+        this.availableTableId = availableTableId;
+        this.seats = seats;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tableInfo = tableInfo;
+        this.bookTables = bookTables;
+    }
+
     public Integer getAvailableTableId() {
         return availableTableId;
     }

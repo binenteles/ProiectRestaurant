@@ -6,11 +6,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 
-public class GenericRepository<T> implements RepositoryInterface {
+public class GenericRepository<T> implements RepositoryInterface<T> {
 
 
     @Override
-    public void findById(Object object, int id) {
+    public void findById(T object, int id) {
         Session session = SessionManager.getSessionFactory().openSession();
         Class<T> aClass = session.find(Class.class, id);
         session.close();
@@ -18,7 +18,7 @@ public class GenericRepository<T> implements RepositoryInterface {
     }
 
     @Override
-    public void save(Object object) {
+    public void save(T object) {
         Session session = SessionManager.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.save(object);
@@ -27,7 +27,7 @@ public class GenericRepository<T> implements RepositoryInterface {
     }
 
     @Override
-    public void update(Object object) {
+    public void update(T object) {
         Session session = SessionManager.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.update(object);
@@ -37,7 +37,7 @@ public class GenericRepository<T> implements RepositoryInterface {
     }
 
     @Override
-    public void delete(Object object) {
+    public void delete(T object) {
         Session session = SessionManager.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.delete(object);

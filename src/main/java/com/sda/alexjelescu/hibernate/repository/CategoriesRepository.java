@@ -1,40 +1,26 @@
 package com.sda.alexjelescu.hibernate.repository;
 
+
 import com.sda.alexjelescu.hibernate.model.Categories;
-import com.sda.alexjelescu.hibernate.utils.SessionManager;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
-public class CategoriesRepository {
-    public Categories findById(Integer id) {
-        Session session = SessionManager.getSessionFactory().openSession();
-        Categories categories = session.find(Categories.class, id);
-        session.close();
-        return categories;
+public class CategoriesRepository extends GenericRepository<Categories> {
+    @Override
+    public void findById(Categories object, int id) {
+        super.findById(object, id);
     }
 
-    public void save(Categories categories) {
-        Session session = SessionManager.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(categories);
-        transaction.commit();
-        session.close();
+    @Override
+    public void save(Categories object) {
+        super.save(object);
     }
 
-    public void update(Categories categories) {
-        Session session = SessionManager.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(categories);
-        transaction.commit();
-        session.close();
+    @Override
+    public void update(Categories object) {
+        super.update(object);
     }
 
-    public void delete(Categories categories) {
-        Session session = SessionManager.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.delete(categories);
-        transaction.commit();
-        session.close();
+    @Override
+    public void delete(Categories object) {
+        super.delete(object);
     }
-
 }

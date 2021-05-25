@@ -27,6 +27,13 @@ public class DailyOffers {
         this.discount = discount;
     }
 
+    public DailyOffers(Integer dailyOfferId, Date date, Integer discount, Products products) {
+        this.dailyOfferId = dailyOfferId;
+        this.date = date;
+        this.discount = discount;
+        this.products = products;
+    }
+
     public Integer getDailyOfferId() {
         return dailyOfferId;
     }

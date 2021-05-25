@@ -38,6 +38,16 @@ public class Products {
         this.price = price;
     }
 
+    public Products(Integer menuId, String productName, Integer quantity, Integer price, Categories categories, List<DailyOffers> dailyOffers, Set<User> users) {
+        this.menuId = menuId;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.price = price;
+        this.categories = categories;
+        this.dailyOffers = dailyOffers;
+        this.users = users;
+    }
+
     public Integer getMenuId() {
         return menuId;
     }
