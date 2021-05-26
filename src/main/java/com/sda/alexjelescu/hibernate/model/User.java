@@ -41,14 +41,13 @@ public class User {
         this.email = email;
     }
 
-    public User(Integer userId, String firstName, String lastName, String phoneNumber, String email, List<BookTable> bookTables, Set<Products> products) {
+    public User(Integer userId, String firstName, String lastName, String phoneNumber, String email, List<BookTable> bookTables) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.bookTables = bookTables;
-        this.products = products;
     }
 
     public Integer getUserId() {

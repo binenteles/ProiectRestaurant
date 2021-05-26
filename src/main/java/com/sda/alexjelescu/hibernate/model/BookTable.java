@@ -37,8 +37,8 @@ public class BookTable {
         this.tableInfo = tableInfo;
     }
 
-    public BookTable(Integer bookTableId, Integer seats, Date startBook, Date endBook, String tableInfo, User user, AvailableTable availableTable) {
-        this.bookTableId = bookTableId;
+    public BookTable(Integer seats, Date startBook, Date endBook, String tableInfo, User user, AvailableTable availableTable) {
+
         this.seats = seats;
         this.startBook = startBook;
         this.endBook = endBook;
@@ -82,6 +82,22 @@ public class BookTable {
 
     public void setTableInfo(String tableInfo) {
         this.tableInfo = tableInfo;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public AvailableTable getAvailableTable() {
+        return availableTable;
+    }
+
+    public void setAvailableTable(AvailableTable availableTable) {
+        this.availableTable = availableTable;
     }
 
     @Override

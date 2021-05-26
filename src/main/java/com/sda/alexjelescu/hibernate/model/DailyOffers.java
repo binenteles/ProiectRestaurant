@@ -17,7 +17,7 @@ public class DailyOffers {
 
     @ManyToOne
     @JoinColumn(name = "fk_product_id")
-    private Products products;
+    private Products product;
 
     public DailyOffers() {
     }
@@ -27,11 +27,10 @@ public class DailyOffers {
         this.discount = discount;
     }
 
-    public DailyOffers(Integer dailyOfferId, Date date, Integer discount, Products products) {
-        this.dailyOfferId = dailyOfferId;
+    public DailyOffers(Date date, Integer discount, Products products) {
         this.date = date;
         this.discount = discount;
-        this.products = products;
+        this.product = products;
     }
 
     public Integer getDailyOfferId() {
@@ -52,6 +51,14 @@ public class DailyOffers {
 
     public void setDiscount(Integer discount) {
         this.discount = discount;
+    }
+
+    public Products getProduct() {
+        return product;
+    }
+
+    public void setProduct(Products product) {
+        this.product = product;
     }
 
     @Override

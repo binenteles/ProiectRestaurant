@@ -23,7 +23,7 @@ public class Products {
     @JoinColumn(name = "fk_categories_id")
     private Categories categories;
 
-    @OneToMany(mappedBy = "products")
+    @OneToMany(mappedBy = "product")
     private List<DailyOffers> dailyOffers;
 
     @ManyToMany(mappedBy = "products")
@@ -38,13 +38,11 @@ public class Products {
         this.price = price;
     }
 
-    public Products(Integer menuId, String productName, Integer quantity, Integer price, Categories categories, List<DailyOffers> dailyOffers, Set<User> users) {
-        this.menuId = menuId;
+    public Products(String productName, Integer quantity, Integer price, Categories categories, Set<User> users) {
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
         this.categories = categories;
-        this.dailyOffers = dailyOffers;
         this.users = users;
     }
 
@@ -74,6 +72,22 @@ public class Products {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Categories getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Categories categories) {
+        this.categories = categories;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     @Override
