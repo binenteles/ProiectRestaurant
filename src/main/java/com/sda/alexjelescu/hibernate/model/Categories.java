@@ -32,8 +32,7 @@ public class Categories {
         this.drinks = drinks;
     }
 
-    public Categories(Integer categoryId, String mainCourse, String secondaryCourse, String desert, String drinks, List<Products> products) {
-        this.categoryId = categoryId;
+    public Categories( String mainCourse, String secondaryCourse, String desert, String drinks, List<Products> products) {
         this.mainCourse = mainCourse;
         this.secondaryCourse = secondaryCourse;
         this.desert = desert;

@@ -38,12 +38,11 @@ public class Products {
         this.price = price;
     }
 
-    public Products(String productName, Integer quantity, Integer price, Categories categories, Set<User> users) {
+    public Products(String productName, Integer quantity, Integer price, Categories categories) {
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
         this.categories = categories;
-        this.users = users;
     }
 
     public Integer getMenuId() {
@@ -78,9 +77,7 @@ public class Products {
         return categories;
     }
 
-    public void setCategories(Categories categories) {
-        this.categories = categories;
-    }
+
 
     public Set<User> getUsers() {
         return users;

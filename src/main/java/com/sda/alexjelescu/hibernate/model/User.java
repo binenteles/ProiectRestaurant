@@ -28,7 +28,7 @@ public class User {
     @JoinTable(name = "users_products",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns ={@JoinColumn(name = "menu_id")})
-    private Set<Products> products = new HashSet<>();
+    private Set<Products> products;
 
 
     public User() {
@@ -41,13 +41,13 @@ public class User {
         this.email = email;
     }
 
-    public User(Integer userId, String firstName, String lastName, String phoneNumber, String email, List<BookTable> bookTables) {
-        this.userId = userId;
+    public User(String firstName, String lastName, String phoneNumber, String email, Set<Products> products) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.bookTables = bookTables;
+        this.products = products;
     }
 
     public Integer getUserId() {
