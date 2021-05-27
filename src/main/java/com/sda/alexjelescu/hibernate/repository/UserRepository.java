@@ -3,6 +3,8 @@ package com.sda.alexjelescu.hibernate.repository;
 
 import com.sda.alexjelescu.hibernate.model.User;
 
+import java.util.List;
+
 public class UserRepository extends GenericRepository<User> {
     @Override
     public void findById(User object, int id) {
@@ -22,5 +24,10 @@ public class UserRepository extends GenericRepository<User> {
     @Override
     public void delete(User object) {
         super.delete(object);
+    }
+
+    @Override
+    public List<User> getAll(User object) {
+        return super.getAll(object);
     }
 }
